@@ -6,6 +6,7 @@
 <link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
 .mac-os-11 { --title-bar-height:28px; }
 html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
 body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
 iframe { margin: auto; }
 a.url { word-break: break-all; }
@@ -22,8 +23,6 @@ body.typora-export { padding-left: 30px; padding-right: 30px; }
 @media screen and (max-width: 500px) {
   body.typora-export { padding-left: 0px; padding-right: 0px; }
   #write { padding-left: 20px; padding-right: 20px; }
-  .CodeMirror-sizer { margin-left: 0px !important; }
-  .CodeMirror-gutters { display: none !important; }
 }
 #write li > figure:last-child { margin-bottom: 0.5rem; }
 #write ol, #write ul { position: relative; }
@@ -51,7 +50,7 @@ sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inh
 #write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
 figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
 figure > table { margin: 0px; }
-tr { break-inside: avoid; break-after: auto; }
+thead, tr { break-inside: avoid; break-after: auto; }
 thead { display: table-header-group; }
 table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
 table.md-table td { min-width: 32px; }
@@ -73,6 +72,7 @@ div.hr:focus { cursor: none; }
 #write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
 .md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
 .CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
 .footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
 .footnotes + .footnotes { margin-top: 0px; }
 .md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
@@ -87,12 +87,14 @@ blockquote > :first-child, li > :first-child { margin-top: 0px; }
 #write .footnote-line { white-space: pre-wrap; }
 @media print {
   body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
-  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
   .typora-export * { -webkit-print-color-adjust: exact; }
   .typora-export #write { break-after: avoid; }
   .typora-export #write::after { height: 0px; }
   .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
   .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
 }
 .footnote-line { margin-top: 0.714em; font-size: 0.7em; }
 a img, img a { cursor: pointer; }
@@ -130,6 +132,7 @@ p > .md-image:only-child { display: inline-block; width: 100%; }
 }
 a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
 .footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
 .md-attr { display: none; }
 .md-fn-count::after { content: "."; }
 code, pre, samp, tt { font-family: var(--monospace); }
@@ -168,7 +171,7 @@ mark .md-meta { color: rgb(0, 0, 0); }
 @media screen and (max-width: 800px) {
   .typora-export-sidebar { display: none; }
 }
-.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
 .outline-content ul { margin-top: 0px; margin-bottom: 0px; }
 .outline-content strong { font-weight: 400; }
 .outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
@@ -199,6 +202,7 @@ mark .md-meta { color: rgb(0, 0, 0); }
 .typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
 .typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
 .md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
 
 
 :root {
@@ -457,11 +461,8 @@ code {
     html {
         font-size: 13px;
     }
-    table,
     pre {
         page-break-inside: avoid;
-    }
-    pre {
         word-wrap: break-word;
     }
 }
@@ -594,10 +595,7 @@ header, .context-menu, .megamenu-content, footer{
 </head>
 <body class='typora-export os-windows'><div class='typora-export-content'>
 <div id='write'  class=''> <center>
-     <span>
-             <img src="assets/2021-08-06 185420.jpg" width="20%">
-         </span>
-     <span><h1>李文琦</h1></span>
+     <h1>李文琦</h1>
      <div>
          <span>
              <img src="assets/phone-solid.svg" width="18px">
@@ -606,13 +604,14 @@ header, .context-menu, .megamenu-content, footer{
          ·
          <span>
              <img src="assets/envelope-solid.svg" width="18px">
-             2101210264@stu.pku.edu.cn
+             liwenqi@stu.pku.edu.cn
          </span>
          ·
          <span>
              <img src="assets/github-brands.svg" width="18px">
-             <a href="https://ruby-g0.github.io/RubyME.github.io/">Ruby-G0</a>
-     </span></div>
- </center><h2 id='个人信息'><img src="assets/info-circle-solid.svg" width="30px"><span> 个人信息 </span></h2><p><span>女，2000 年出生</span></p><p><span>软件与微电子学院，24 fall</span></p><h2 id='教育经历'><img src="assets/graduation-cap-solid.svg" width="30px"><span> 教育经历</span></h2><p><strong><span>北京大学</span></strong><span> （2021年09月 - 2024年06月 北京）</span></p><p><span>语言信息工程</span><span>	</span><span>电子信息类</span><span>	</span><span>硕士 </span></p><p><strong><span>吉林大学</span></strong><span> （2017年09月 - 2021年06月 长春）</span></p><p><span>英语系</span><span>	</span><span>外国语学院</span><span>	</span><span>本科</span></p><ul><li><span>GPA 3.53/4</span><span>	</span><span>年级前 30%</span></li><li><span>吉林大学三等奖学金（2017-2018，2019-2020)</span></li></ul><p><strong><span>吉林大学</span></strong><span> （2018年09月 - 2020年06月 长春）</span></p><p><span>计算机科学与技术</span><span>	</span><span>计算机科学与技术学院</span><span>	</span><span>本科</span><span>	</span><span>双学位</span></p><ul><li><span>主修课程：高级语言程序设计（c++）、计算机网络、计算机组成原理、操作系统、数据库应用等</span></li></ul><h2 id='项目经历'><img src="assets/project-diagram-solid.svg" width="30px"><span> 项目经历</span></h2><p><strong><span>英德机器翻译</span></strong><span>	</span><em><span>python、pycharm、torch</span></em><span> （2021年10月 - 2021年12月）</span></p><p><span>在该小组项目中，复现了论文 </span><a href='https://arxiv.org/abs/1409.3215'><span>“Sequence to Sequence Learning with Neural Networks”</span></a><span> 中的基于LSTM网络的机器翻译模型的简化版，并为其编写接口，测试了模型的翻译效果。</span></p><p><strong><span>独立小型游戏开发</span></strong><span> </span><span>	</span><em><span>Godot引擎</span></em><span>	</span><span>(2021年10月 - 2021年11月)</span></p><p><span>独自使用Godot引擎开发完整三消类游戏，包括游戏界面设计、自适应ui、游戏机制设计、关卡设计、脚本编写、测试发布。 </span></p><p><span>使用godotscript为游戏编写脚本，实现了操作判定、胜负判定、计时系统以及积分系统等。 </span></p><p><span>为ui附加动画效果，增强了游戏体验的连贯性。</span></p><p><strong><span>语料库分析</span></strong><span>	</span><span>（2020年11月 - 2021年04月）</span></p><p><span>利用开源语料库软件AntConc建立针对纽约时报的小型语料库，借助关键词提取、N-Gram模型、RegEx工具提取显著话语模 式，并从批评话语分析角度分析语篇。</span></p><p><strong><span>网站搭建</span></strong><span> </span><span>	</span><em><span>navicat、tomcat、wordpress框架</span></em><span> </span><span>	</span><span>（2020年03月 - 2020年05月）</span></p><p><span>使用navicat for mysql，tomcat，wordpress框架搭建英汉口译笔记法百科网站。</span></p><h2 id='社团和组织经历'><img src="assets/briefcase-solid.svg" width="30px"><span> 社团和组织经历</span></h2><p><strong><span>吉林大学外国语学院英语戏剧节</span></strong><span>	</span><span>（2019年05月 - 2019年06月）</span></p><p><span>负责前期制图、宣传工作。</span></p><ul><li><span>参演剧目《无人生还》获一等奖。</span></li></ul><p><strong><span>吉林大学U&amp;I志愿者协会</span></strong><span>	</span><span>（2018年03月 - 2019年06月）</span></p><p><span>任宣传部部长。负责安排部内软件技术学习工作。</span></p><ul><li><span>在职期间获2018年度校十佳社团</span></li></ul><h2 id='专业技能'><img src="assets/tools-solid.svg" width="30px"><span> 专业技能</span></h2><ul><li><span>编程语言：Python，C++，SQL（mysql）、php </span></li></ul><ul><li><span>开发工具：Pycharm，Anaconda，VScode </span></li></ul><ul><li><span>外语证书：TEM-4（优秀）、TEM-4口语、TEM-8（良好）、TEM-8口语、CJT-4（大学生日语四级）</span></li></ul><p>&nbsp;</p></div></div>
+             <a href="https://github.com/Ruby-G0">Ruby-G0</a>
+         </span>
+     </div>
+ </center><h2 id='个人信息'><img src="assets/info-circle-solid.svg" width="30px"><span> 个人信息 </span></h2><ul><li><p><span>女，22岁，北京大学软件与微电子学院21级硕士生，预计2024年毕业</span></p></li><li><p><span>求职意向：NLP算法实习生，可长期全职实习</span></p></li></ul><h2 id='教育经历'><img src="assets/graduation-cap-solid.svg" width="30px"><span> 教育经历</span></h2><p><strong><span>北京大学</span></strong><span> （2021年09月 - 2024年06月 北京）</span></p><p><span>语言信息工程</span><span>	</span><span>电子信息类</span><span>	</span><span>硕士 </span></p><p><strong><span>吉林大学</span></strong><span> （2018年09月 - 2020年06月 长春）</span></p><p><span>计算机科学与技术</span><span>	</span><span>计算机科学与技术学院</span><span>	</span><span>本科</span><span>	</span><span>双学位</span></p><ul><li><p><span>毕业设计：基于开源框架Wordpress搭建口译速记符号百科网站</span></p></li></ul><p><strong><span>吉林大学</span></strong><span> （2017年09月 - 2021年06月 长春）</span></p><p><span>英语系</span><span>	</span><span>外国语学院</span><span>	</span><span>本科</span></p><ul><li><p><span>毕业设计：基于小型语料库的批评话语分析</span></p></li><li><p><span>期间获吉林大学三等奖学金（2017-2018，2019-2020)</span></p></li></ul><h2 id='实习经历'><img src="assets/briefcase-solid.svg" width="30px"><span> 实习经历</span></h2><p><strong><span>腾讯科技（北京）WXG-模式识别中心</span></strong><span> 算法研究实习生 （2022年01月 - 2022年11月）</span></p><p><span>探索了在机器翻译任务中，如何提升Transformer的Contrained Decoding能力 </span></p><ul><li><p><span>使用pylucene在开源知识图谱BabelNet中进行数据挖掘和清洗，在WMT2014 DE-EN 数据集和LDC ZH-EN数据集的基础上，构建constrained decoding数据集 </span></p></li><li><p><span>复现了相关论文结果，并在我们提出的任务上，使用自行构建的数据集进行了实验作为baseline </span></p></li><li><p><span>在baseline的基础上对模型结构进行改进，在BLEU值没有下降的前提下，提高了CSR</span></p></li></ul><h2 id='项目经历'><img src="assets/project-diagram-solid.svg" width="30px"><span> 项目经历</span></h2><p><strong><span>古汉语分词和词性标注模型的设计与实现</span></strong><span>   </span><em><span>pytorch huggingface</span></em><span> （2022年04月 - 2022年05月）</span></p><ul><li><p><span>在EvaHan 2022比赛任务数据集上，使用 biLSTM based 模型和 Bert based 模型，进行古汉语分词和词性标注任务 </span></p></li><li><p><span>在两个官方测试集A、B上分别达到了94.17%和90.28%的F1值</span></p></li></ul><p><strong><span>基于深度学习的中文文本语法纠错模型的设计与实现</span></strong><span>   </span><em><span>pytorch huggingface</span></em><span> （2022年03月 - 2022年04月）</span></p><ul><li><p><span>使用fdu发布的 Chinese BART-large 预训练模型，在 NLPCC2018 task2 数据集上对进行了微调，取得了接近比赛SOTA 的结果</span></p></li></ul><p><strong><span>基于统计方法和深度学习方法的中文分词项目</span></strong><span>   </span><em><span>pytorch huggingface</span></em><span> （2022年03月 - 2022年05月）</span></p><ul><li><p><span>分别使用N-Gram算法、统计模型方法和神经网络算法，在SIGHAN 2005分词任务中的PKU和MSR数据集上进行训练和验 证。其中 Bert based 模型取得了最好表现</span></p></li></ul><p><strong><span>基于开源游戏引擎的游戏开发</span></strong><span>   </span><em><span>godot godot_script</span></em><span> （2021年11月 - 2021年12月）</span></p><ul><li><p><span>独立使用开源游戏引擎Godot，开发完整消除类游戏demo </span></p></li><li><p><span>使用脚本语言，实现了游戏ui自适应、操作判定、胜负判定、计时系统以及积分系统</span></p></li></ul><h2 id='专业技能'><img src="assets/tools-solid.svg" width="30px"><span> 专业技能</span></h2><ul><li><p><span>平台和语言：Linux、Python、shell、C++ </span></p></li><li><p><span>外语证书：TEM-4（英语专业四级 优秀）、TEM-4口语、TEM-8（英语专业八级 良好）、TEM-8口语、CJT-4（大学生日 语四级）</span></p></li></ul><p>&nbsp;</p></div></div>
 </body>
 </html>
